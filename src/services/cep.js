@@ -1,5 +1,5 @@
-const axios = require('axios').default;
-const moment = require('moment');
+import axios from 'axios';
+
 global.timestampToken = null;
 
 exports.validationCEP = async function (cep) {
