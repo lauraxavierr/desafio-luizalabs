@@ -9,7 +9,7 @@ exports.validationCEP = async function (cep) {
 	}
 
 	try {
-		var resultCep = await findCEP(cep)
+		var resultCep = await findCEP(cep);
 		if (resultCep.status == 200 && resultCep.data.erro === true) {
 			for (var i = cep.length - 1; i >= 0; i--) {
 				cep = cep.split('')
@@ -18,7 +18,7 @@ exports.validationCEP = async function (cep) {
 
 				var resultCep = await findCEP(cep)
 				if (resultCep.data.cep != undefined) {
-					break
+					break;
 				}
 			}
 			return resultCep.data;
@@ -27,6 +27,6 @@ exports.validationCEP = async function (cep) {
 		}
 
 	} catch (error) {
-		console.log("[ERROR]", error);
+		console.log('[ERROR]', error);
 	};
 }

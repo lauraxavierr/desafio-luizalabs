@@ -29,7 +29,7 @@ class UserController {
 				});
 			} // Verifica se o e-mail já existe.
 
-			const values = await User.create(req.body)
+			const values = await User.create(req.body);
 			// Registra o usuário no banco de dados.
 
 			if (values) {
@@ -39,11 +39,11 @@ class UserController {
 					senha: values['dataValues']['senha'],
 					data_criacao: values['dataValues']['createdAt'],
 					data_atualizacao: values['dataValues']['updatedAt']
-				})
+				});
 			} // Retorna os valores como resposta na requisição
 
 		} catch (error) {
-			console.log("[ERROR]", error);
+			console.log('[ERROR]', error);
 		};
 
 	};

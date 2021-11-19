@@ -69,11 +69,11 @@ class CEPController {
 					const infosCEP = await validationCEP(req.body.cep);
 
 					const user = [
-						{"cep": infosCEP.cep},
-						{"rua": infosCEP.logradouro},
-						{"bairro": infosCEP.bairro},
-						{"cidade": infosCEP.localidade},
-						{"estado": infosCEP.uf}
+						{'cep': infosCEP.cep},
+						{'rua': infosCEP.logradouro},
+						{'bairro': infosCEP.bairro},
+						{'cidade': infosCEP.localidade},
+						{'estado': infosCEP.uf}
 					]
 
 					const updateValues = await User.update(user, {
@@ -85,11 +85,11 @@ class CEPController {
 
 					if (await updateValues) {
 						return res.json({
-							"cep": infosCEP.cep,
-							"rua": infosCEP.logradouro,
-							"bairro": infosCEP.bairro,
-							"cidade": infosCEP.localidade,
-							"estado": infosCEP.uf
+							'cep': infosCEP.cep,
+							'rua': infosCEP.logradouro,
+							'bairro': infosCEP.bairro,
+							'cidade': infosCEP.localidade,
+							'estado': infosCEP.uf
 						});
 					}
 
@@ -97,7 +97,7 @@ class CEPController {
 			}
 
 		} catch (error) {
-			console.log("[ERROR]", error);
+			console.log('[ERROR]', error);
 		};
 
 

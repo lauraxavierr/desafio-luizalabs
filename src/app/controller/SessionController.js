@@ -51,8 +51,8 @@ class SessionController {
 			expiresIn.setMinutes(expiresIn.getMinutes() + 30);
 			//Acrescenta 30 min ao horário atual para validação de autenticação.
 
-			const userId = user['dataValues']['id']
-			const userNome = user['dataValues']['nome']
+			const userId = user['dataValues']['id'];
+			const userNome = user['dataValues']['nome'];
 
 			var token = jwt.sign({
 				userId,
@@ -91,11 +91,11 @@ class SessionController {
 					data_atualizacao: checkValues['dataValues']['updated_at'],
 					ultimo_login: checkValues['dataValues']['ultimo_login'],
 					token: checkValues['dataValues']['token']
-				})
+				});
 			}
 
 		} catch (error) {
-			console.log("[ERROR]", error);
+			console.log('[ERROR]', error);
 		};
 
 	}

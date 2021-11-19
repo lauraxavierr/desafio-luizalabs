@@ -1,10 +1,10 @@
 import { Router }  from 'express'; 
-import swaggerUI from "swagger-ui-express";
+import swaggerUI from 'swagger-ui-express';
 
 import UserController from './app/controller/UserController';
 import SessionController from './app/controller/SessionController';
 import authMiddleware from './app/middlewares/auth';
-import CEPController from './app/controller/CEPController'
+import CEPController from './app/controller/CEPController';
 import swaggerDocument from './config/swagger';
 
 

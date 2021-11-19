@@ -1,8 +1,8 @@
-import Sequelize from "sequelize";
-import Users from '../app/models/Users'
+import Sequelize from 'sequelize';
+import Users from '../app/models/Users';
 import databaseconfig from '../config/database';
 
-const models = [ Users ]
+const models = [ Users ];
 
 class Database {
    constructor() {
@@ -15,7 +15,7 @@ class Database {
 
      models
      .map(model => model.init(this.connection))
-     .map(model => model.associate && model.associate(this.connection.models))
+     .map(model => model.associate && model.associate(this.connection.models));
 
    }
 }
