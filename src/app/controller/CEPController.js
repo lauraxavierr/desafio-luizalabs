@@ -13,6 +13,12 @@ class CEPController {
 			cep: Yup.string().required().min(8)
 		});
 
+		if ((req.body.cep).length > 8) {
+			return res.status(401).json({
+				message: 'CEP inválido'
+			});
+		}
+
 		if (!(await schema.isValid(req.body))) {
 			return res.status(401).json({
 				message: 'Dados inválidos'
