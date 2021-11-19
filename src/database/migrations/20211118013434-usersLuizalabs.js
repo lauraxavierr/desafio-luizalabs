@@ -1,19 +1,15 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
-      id: {
+	up: async (queryInterface, Sequelize) => {
+		return queryInterface.createTable('usersLuizalabs', {
+			id: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 			},
-			nome: {
-				type: Sequelize.STRING,
-				allowNull: false,
-			},
-			email: { 
+			email: {
 				type: Sequelize.STRING,
 				allowNull: false,
 				unique: true,
@@ -22,11 +18,23 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},
-      cep:{
-        type: Sequelize.STRING,
+			cep: {
+				type: Sequelize.STRING,
 				allowNull: false,
-      },
-      telefone: {
+			},
+			rua: {
+				type: Sequelize.STRING,
+				allowNull: false,
+			},
+			bairro: {
+				type: Sequelize.STRING,
+				allowNull: false,
+			},
+			cidade: {
+				type: Sequelize.STRING,
+				allowNull: false,
+			},
+			estado: {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},
@@ -50,10 +58,11 @@ module.exports = {
 				type: Sequelize.DATE,
 				allowNull: false,
 			}
-    })
-  },
+		})
+	},
 
-  down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('users');
-  }
+	down: async (queryInterface, Sequelize) => {
+		return queryInterface.dropTable('usersLuizalabs');
+
+	}
 };
