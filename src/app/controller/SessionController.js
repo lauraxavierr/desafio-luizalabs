@@ -12,14 +12,15 @@ class SessionController{
 			senha: Yup.string().required().min(6)
 		});
 
-		const { email, senha } = req.body;
-
 		if (!(await schema.isValid(req.body))) {
 			return res.status(401).json({
 				message: 'Dados inválidos'
 			});
-		}
+		} // Valida os dados passados no body da requisição.
 
+		const email = req.body.email;
+		const senha = req.body.senha;
+		
 		const user = await User.findOne({
 			where: { email }
 		});
@@ -34,47 +35,43 @@ class SessionController{
 			return res.status(401).json({ message: 'Usuário e/ou senha inválidos'});
 		}
 
-		const { id, nome} = User.findOne({ where: { email: req.body.email }});
-		const checkValues = await User.findOne({ where: { email: req.body.email }});
-
 		var dateNow = new Date();
 		dateNow.setHours(dateNow.getHours());
 
 		var dateExpiresIn = new Date();
 		dateExpiresIn.setHours(dateExpiresIn.getHours());
 
-		var token = jwt.sign({id, nome,email}, process.env.SECRET, {
-			expiresIn: process.env.EXPIRESIN,
-		});
-
 		var expiresIn = dateExpiresIn;
 		expiresIn.setMinutes(expiresIn.getMinutes() + 30);
+		//Acrescenta 30 min ao horário atual para validação de autenticação.
+
+		const userId = user['dataValues']['id']
+		const userNome = user['dataValues']['nome']
+
+		var token = jwt.sign({userId, userNome, email}, process.env.SECRET, {
+			expiresIn: process.env.EXPIRESIN,
+		});
 
 
 		const updateValues = await User.update({token: token, data_atualizacao: dateNow.toUTCString(), ultimo_login: dateNow.toUTCString(), expira_login: expiresIn.toUTCString()},{
 			where: {
-				id: checkValues['dataValues']['id']}
+				id: user['dataValues']['id']}
 		});
 
-		if(checkValues) {
-			updateValues;
-		}
+		const checkValues = await User.findOne({ where: { email: email }});
 
-		const valuesDB = {
-			user: {
+
+		if(checkValues) {
+			updateValues,
+			res.json({
 				id: checkValues['dataValues']['id'],
-				nome: checkValues['dataValues']['nome'],
 				email: checkValues['dataValues']['email'],
-				senha: checkValues['dataValues']['senha'],
-				telefone: checkValues['dataValues']['telefone'],
+				senha: req.body.senha,
 				data_criacao: checkValues['dataValues']['createdAt'],
-				data_atualizacao: dateNow,
-				ultimo_login: dateNow,
-				token: token
-			}
-		};
-		if(valuesDB) {
-			return res.json(valuesDB);
+				data_atualizacao: checkValues['dataValues']['updated_at'],
+				ultimo_login: checkValues['dataValues']['ultimo_login'],
+				token: checkValues['dataValues']['token']
+			})
 		}
 
 	}
