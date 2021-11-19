@@ -22,7 +22,7 @@ class usersluizalabs extends Model {
 		this.addHook('beforeSave', async user => {
 			user.password = user.senha;
 			user.senha = await bcrypt.hash(user.password, 10);
-		})
+		});
 
 		return this;
 	}

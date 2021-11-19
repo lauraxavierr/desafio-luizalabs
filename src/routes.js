@@ -1,11 +1,10 @@
-import { Router }  from 'express'; //Extraindo um objeto da biblioteca Router do express
+import { Router }  from 'express'; 
 import swaggerUI from "swagger-ui-express";
 
 import UserController from './app/controller/UserController';
 import SessionController from './app/controller/SessionController';
 import authMiddleware from './app/middlewares/auth';
 import CEPController from './app/controller/CEPController'
-
 import swaggerDocument from './config/swagger';
 
 
@@ -17,7 +16,6 @@ routes.post('/signin', SessionController.store); //login
 
 routes.put('/cep/:user_id', authMiddleware, CEPController.index);
 
-
-routes.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+routes.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 export default routes;
