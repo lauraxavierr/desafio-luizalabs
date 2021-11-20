@@ -28,7 +28,7 @@ class CEPController {
 			const authToken = req.headers.authorization;
 			const [, token] = authToken.split(' '); //Remove o Bearer
 
-			const checkValues = await User.findOne({
+			var checkValues = await User.findOne({
 				where: {
 					id: req.params.user_id
 				}
@@ -68,28 +68,33 @@ class CEPController {
 				} else {
 					const infosCEP = await validationCEP(req.body.cep);
 
-					const user = [
-						{'cep': infosCEP.cep},
-						{'rua': infosCEP.logradouro},
-						{'bairro': infosCEP.bairro},
-						{'cidade': infosCEP.localidade},
-						{'estado': infosCEP.uf}
-					]
-
-					const updateValues = await User.update(user, {
+					const updateValues = await User.update({
+						"cep": infosCEP.cep,
+						"rua": infosCEP.logradouro,
+						"bairro": infosCEP.bairro,
+						"cidade": infosCEP.localidade,
+						"estado": infosCEP.uf
+						}, {
 						where: {
 							id: checkValues['dataValues']['id']
 						}
 					});
 
+					var checkValues = await User.findOne({
+						where: {
+							email: checkValues['dataValues']['email']
+						}
+					});
 
-					if (await updateValues) {
-						return res.json({
-							'cep': infosCEP.cep,
-							'rua': infosCEP.logradouro,
-							'bairro': infosCEP.bairro,
-							'cidade': infosCEP.localidade,
-							'estado': infosCEP.uf
+
+					if (checkValues) {
+						updateValues,
+						res.json({
+							'cep': checkValues['dataValues']['cep'],
+							'rua': checkValues['dataValues']['rua'],
+							'bairro': checkValues['dataValues']['bairro'],
+							'cidade': checkValues['dataValues']['cidade'],
+							'estado': checkValues['dataValues']['uf']
 						});
 					}
 
