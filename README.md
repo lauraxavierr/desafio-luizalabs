@@ -130,7 +130,7 @@ Dado o serviço de busca de CEP proposto, entende-se que Node.js seria a melhor 
 
 - considere a performance do algoritmo e o tempo de resposta da aplicação, sabendo que a API  pode receber flutuações de tráfego agressivas.
 
-![AWS](./images/AWS.png)
+![AWS](./assets/images/AWS.png)
 
 ```
 Acima segue exemplo de infraestrutura que pode ser utilizada para essa aplicação.
@@ -152,7 +152,7 @@ Acima segue exemplo de infraestrutura que pode ser utilizada para essa aplicaç�
 Hypertext Transfer Protocol (HTTP) é um protocolo de comunicação, o qual possibilita que o usuário envie uma requisição e o servidor responda (Request-Response). Também é importante ressaltar que o HTTP é stateless, ou seja, o HTTP não armazena requisições anteriores enviadas para o servidor. 
 ```
 
-![Fluxo](./images/HTTP.png)
+![Fluxo](./assets/images/HTTP.png)
 
 ```
 Ao inserir a URL da imagem acima no browser, ocorre os seguintes passos:
