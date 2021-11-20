@@ -48,6 +48,9 @@ npm run dev
 
 ## Rotas/Endpoints
 
+A documentação Swagger pode ser encontrada no endpoint -> 
+http://localhost:5000/swagger/
+
 ### Sign up
 POST http://localhost:5000/signup
 
